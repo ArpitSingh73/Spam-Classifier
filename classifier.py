@@ -20,8 +20,8 @@ result
 data = pd.read_csv(data, encoding='ISO-8859-1')
 
 
-print(data.sample(5))
-print(data.info)
+# print(data.sample(5))
+# print(data.info)
 
 # ##### -------------------Steps to be performed----------------------------
 # Data info
@@ -34,7 +34,7 @@ print(data.info)
 # Deploy
 
 data = data[['v1', 'v2']]
-print(data.sample(10))
+# print(data.sample(10))
 # renaming the columns name-->
 data.rename(columns={'v1': 'type', 'v2': 'text'}, inplace=True)
 
@@ -43,18 +43,17 @@ data.rename(columns={'v1': 'type', 'v2': 'text'}, inplace=True)
 encoder = LabelEncoder()
 data['type'] = encoder.fit_transform(data['type'])
 
-print(data.sample(10))
-print(data.isnull().sum())
-print(data.duplicated().sum())
+# print(data.sample(10))
+# print(data.isnull().sum())
+# print(data.duplicated().sum())
 
 # dropping duplicats values-->
 data = data.drop_duplicates(keep='first')
-print(data.duplicated().sum())
-
+# print(data.duplicated().sum())
 
 # pie chart for visualization of ham vs spam values-->
 plt.pie(data['type'].value_counts(), labels=['ham', 'spam'], autopct="0.2f")
-plt.show()
+# plt.show()
 
 # adding 3 more columns which contains number of characters, words and sentences respectively-->
 data['char_count'] = data['text'].apply(lambda m: len(m))
@@ -66,9 +65,9 @@ x = data[data['type'] == 1][['char_count', 'word_count', 'sent_count']].describe
 y = data[data['type'] == 0][['char_count', 'word_count', 'sent_count']].describe()
 
 
-print(x)
-print()
-print(y)
+# print(x)
+# print()
+# print(y)
 
 
 # plotting the histplot chart of ham vs spam character count-->
@@ -92,7 +91,7 @@ ps = PorterStemmer()
 # stemming(reducing words to its nearest possible root words)
 
 def transform_(text):
-    text = text.lower()
+    text = text.lower().strip("\'")
     text = nltk.word_tokenize(text)
 
     list = []
@@ -119,7 +118,8 @@ def transform_(text):
 
 # creting a new column in existing dataframe to store the result of above function-->
 data['tranf_text'] = data['text'].apply(transform_)
-print(data.head())
+# print(data.head())
+print("line 123")
 
 
 # visualizing the top 30 words-->
@@ -133,7 +133,7 @@ print(len(spam_corpus))
 sns.barplot(pd.DataFrame(Counter(spam_corpus).most_common(30))[
             0], pd.DataFrame(Counter(spam_corpus).most_common(30))[1])
 plt.xticks(rotation='vertical')
-plt.show()
+# plt.show()
 
 
 ham_corpus = []
@@ -145,8 +145,36 @@ print(len(ham_corpus)
 sns.barplot(pd.DataFrame(Counter(ham_corpus).most_common(30))[
             0], pd.DataFrame(Counter(ham_corpus).most_common(30))[1])
 plt.xticks(rotation='vertical')
-plt.show()
+# plt.show()
 
 
 
 # 
+
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+cv = CountVectorizer()
+tfid = TfidfVectorizer(max_features=3000)
+
+print("161")
+x = tfid.fit_transform(data['tranf_text']).toarray()
+y = data['type'].values
+
+from sklearn.model_selection import train_test_split
+
+x_train, x_test , y_train , y_test = train_test_split(x, y, test_size=0.2, random_state=2)
+
+
+from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score
+
+gb = GaussianNB()
+mb = MultinomialNB()
+br = BernoulliNB()
+
+mb.fit(x_train, y_train)
+y_pred = mb.predict(x_test)
+print(accuracy_score(y_test, y_pred))
+print(confusion_matrix(y_test, y_pred))
+print(precision_score(y_test, y_pred))

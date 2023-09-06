@@ -9,7 +9,7 @@ import seaborn as sns
 import string
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-
+import pickle
 
 data = 'spam.csv'
 # because of encoding error, I used this method to read the file-->
@@ -155,10 +155,10 @@ plt.xticks(rotation='vertical')
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 cv = CountVectorizer()
-tfid = TfidfVectorizer(max_features=3000)
+tfidf = TfidfVectorizer(max_features=3000)
 
 print("161")
-x = tfid.fit_transform(data['tranf_text']).toarray()
+x = tfidf.fit_transform(data['tranf_text']).toarray()
 y = data['type'].values
 
 from sklearn.model_selection import train_test_split
@@ -170,11 +170,14 @@ from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score
 
 gb = GaussianNB()
-mb = MultinomialNB()
+mnb = MultinomialNB()
 br = BernoulliNB()
 
-mb.fit(x_train, y_train)
-y_pred = mb.predict(x_test)
+mnb.fit(x_train, y_train)
+y_pred = mnb.predict(x_test)
 print(accuracy_score(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
 print(precision_score(y_test, y_pred))
+pickle.dump(tfidf, open('vectorizer.pkl', 'wb'))
+
+pickle.dump(mnb, open('model.pkl', 'wb'))

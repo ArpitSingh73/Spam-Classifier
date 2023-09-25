@@ -3,6 +3,7 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+import sklearn
 
 import streamlit as st
 var =  st.sidebar.radio("Navigation", ["Home", "About"])

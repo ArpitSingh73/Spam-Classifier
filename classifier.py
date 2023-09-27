@@ -362,32 +362,25 @@ mnb = MultinomialNB()
 bnb = BernoulliNB()
 gnb.fit(X_train, y_train)
 y_pred1 = gnb.predict(X_test)
-print(accuracy_score(y_test, y_pred1))
-print(confusion_matrix(y_test, y_pred1))
-print(precision_score(y_test, y_pred1))
+# print(accuracy_score(y_test, y_pred1))
+# print(confusion_matrix(y_test, y_pred1))
+# print(precision_score(y_test, y_pred1))
 
 
 
 mnb.fit(X_train, y_train)
 y_pred2 = mnb.predict(X_test)
-print(accuracy_score(y_test, y_pred2))
-print(confusion_matrix(y_test, y_pred2))
-print(precision_score(y_test, y_pred2))
+# print(accuracy_score(y_test, y_pred2))
+# print(confusion_matrix(y_test, y_pred2))
+# print(precision_score(y_test, y_pred2))
 
 
 bnb.fit(X_train, y_train)
 y_pred3 = bnb.predict(X_test)
-print(accuracy_score(y_test, y_pred3))
-print(confusion_matrix(y_test, y_pred3))
-print(precision_score(y_test, y_pred3))
+# print(accuracy_score(y_test, y_pred3))
+# print(confusion_matrix(y_test, y_pred3))
+# print(precision_score(y_test, y_pred3))
 
-
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.svm import SVC
-# from sklearn.tree import DecisionTreeClassifier
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, BaggingClassifier , ExtraTreesClassifier, GradientBoostingClassifier
-# from xgboost import XGBClassifier
 import pickle
 pickle.dump(tfidf,open('vectorizer.pkl','wb'))
 pickle.dump(mnb,open('model.pkl','wb'))

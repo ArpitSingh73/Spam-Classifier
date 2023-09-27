@@ -11,7 +11,6 @@ import sklearn
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import pickle
-import scipy.sparse._csr
 
 data = 'spam.csv'
 # because of encoding error, I used this method to read the file-->

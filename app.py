@@ -80,7 +80,7 @@ if var == "Home":
     model = pickle.load(open('model.pkl', 'rb'))
     st.title('Spam Classifier')
 
-    input_sms = st.text_area(label="",placeholder="Enter the email to check", height=200)
+    input_sms = st.text_area(label="",height=200)
     ps = PorterStemmer()
     nltk.download('punkt')
     nltk.download('stopwords')

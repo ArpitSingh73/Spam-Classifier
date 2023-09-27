@@ -8,6 +8,8 @@ import nltk
 import seaborn as sns
 import string
 import sklearn
+nltk.download('stopwords')
+nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import pickle

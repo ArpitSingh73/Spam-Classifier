@@ -126,4 +126,4 @@ if var == "Home":
 
 
 elif var == "About":
-    st.subheader("Hi there, this is my first project of NLP(machine learning). As by name of the project, this is a spam classifier. The accuracy of this model is of about 96%. I have used Multonomial Naive Bias Classification algorithm to train this model along with some important  NLP concepts like stemming, tokenization, stopwords removal etc. The data I used, was downloaded from Kaggle.Thanks to CampusX")      
+    st.subheader("Hi there, this is my first project of NLP(machine learning). As by name of the project, this is a spam classifier. The accuracy of this model is of about 96%. I have used Multinomial Naive Bayes Classification algorithm to train this model along with some important  NLP concepts like stemming, tokenization, stopwords removal etc. The data I used, was downloaded from Kaggle.Thanks to CampusX")      

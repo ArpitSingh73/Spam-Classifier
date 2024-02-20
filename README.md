@@ -1,4 +1,4 @@
-#Spam-Classifier
+# Spam-Classifier
 
 check it out :- https://arpitsingh73-spam.streamlit.app/
 
